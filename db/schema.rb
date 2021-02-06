@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_06_045712) do
+ActiveRecord::Schema.define(version: 2021_02_06_051544) do
 
   create_table "children", force: :cascade do |t|
     t.string "name"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 2021_02_06_045712) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "monthly_workouts", force: :cascade do |t|
+    t.integer "workout_id"
+    t.date "target_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "workouts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -33,4 +40,5 @@ ActiveRecord::Schema.define(version: 2021_02_06_045712) do
 
   add_foreign_key "children_workouts", "children"
   add_foreign_key "children_workouts", "workouts"
+  add_foreign_key "monthly_workouts", "workouts"
 end

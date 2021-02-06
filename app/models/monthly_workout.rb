@@ -1,0 +1,2 @@
+class MonthlyWorkout < ApplicationRecord
+end
