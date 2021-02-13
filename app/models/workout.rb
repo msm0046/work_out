@@ -1,4 +1,4 @@
 class Workout < ApplicationRecord
   has_many :children_workouts
-  belongs_to :monthly_workout
+  has_many :monthly_workout
 end
