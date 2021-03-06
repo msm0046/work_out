@@ -12,11 +12,11 @@ class WorkoutEntriesController < ApplicationController
     end
     # monthly_workouts テーブルのworkout_idからchildren_workouts テーブルのworkout_idを検索する
     # NOTE: monthly_workouts は配列。MonthlyWorkout レコードがゼロ個以上含まれている
-    children_workouts = 
+    children_workouts =
       monthly_workouts.map do |monthly_workout|
         ChildrenWorkout.where(workout_id: monthly_workout.workout_id)
       end
-    
+
     #  検索したworkout_idを元にchildテーブルのnameを表示する
     # HINT: map で解決できそう
     children_name_list = 
