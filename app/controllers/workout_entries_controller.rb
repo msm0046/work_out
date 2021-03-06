@@ -22,6 +22,10 @@ class WorkoutEntriesController < ApplicationController
       children_workouts.flatten.map do |children_workout|
         children_workout.child.name
       end
-    end
+    # flatten メソッド: [ [:a], [:b, :c], [:d, [:e]]].flatten # => [:a, :b, :c, :d, :e]
   end
+
+  # TODO: 今月のワークアウト名に対して、どの児童が対応しているか、データの対応付けをする
+
+  # TODO: JavaScript でワークアウト名の自動保存する
 end
