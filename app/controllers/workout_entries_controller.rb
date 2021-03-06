@@ -4,7 +4,7 @@ class WorkoutEntriesController < ApplicationController
     @month = params[:month]
 
     # 受け取った年月でmonthly_workouts テーブルのtarget_dateを検索する
-    monthly_workouts = MonthlyWorkout.where(target_date: Date.new(@year, @month, 1))
+    monthly_workouts = MonthlyWorkout.where(target_date: Date.new(@year.to_i, @month.to_i, 1))
     # 検索したtarget_dateを元にworkout名を表示する
 
     workout_name_list = monthly_workouts.map do |monthly_workout|
