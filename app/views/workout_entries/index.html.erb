@@ -5,11 +5,17 @@
 
 <!-- TODO: workout の入力欄を 3つ 用意する -->
 
+<form action="/foo" method="POST">
+    <input type="text" name="id">
+    <input type="text" name="workout_name">
+    <input type="submit">
+</form>
+
 <div class="wrapper">
     <table>
         <thead>
             <tr>
-                <td>おにごっこ</td>
+                <td data-workout_id="1" class="td">おにごっこ</td>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +31,7 @@
     <table>
         <thead>
             <tr>
-                <td>なわとび</td>
+                <td class="td">なわとび</td>
             </tr>
         </thead>
         <tbody>
@@ -41,7 +47,7 @@
     <table>
         <thead>
             <tr>
-                <td>じゃんけん</td>
+                <td class="td">じゃんけん</td>
             </tr>
         </thead>
         <tbody>
