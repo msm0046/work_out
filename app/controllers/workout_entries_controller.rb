@@ -18,9 +18,8 @@ class WorkoutEntriesController < ApplicationController
       end
 
     #  検索したworkout_idを元にchildテーブルのnameを表示する
-    # HINT: map で解決できそう
-    children_name_list = 
-      children_workouts.map do |children_workout|
+    children_name_list =
+      children_workouts.flatten.map do |children_workout|
         children_workout.child.name
       end
     end
