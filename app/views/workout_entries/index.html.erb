@@ -5,17 +5,25 @@
 
 <!-- TODO: workout の入力欄を 3つ 用意する -->
 
-<form action="/foo" method="POST">
-    <input type="text" name="id">
-    <input type="text" name="workout_name">
-    <input type="submit">
-</form>
+<%= form_with url: '/admin/workouts/monthly', id: 'form' do |f| %>
+    <%= f.text_field 'id' %>
+    <%= f.text_field 'workout_name' %>
+    <%= f.submit 'submit' %>
+<% end %>
 
 <div class="wrapper">
     <table>
         <thead>
             <tr>
-                <td data-workout_id="1" class="td">おにごっこ</td>
+                <% @workouts.each do |workout| %>
+                    <td class="td">
+                    <!-- input を表示したとき、workout を非表示にしたい -->
+                    <div class="toggle">
+                        <input type="text" class="toggleInput" data-id="<%= workout.id %>">
+                        <span class="toggleValue"><%= workout.name %></span>
+                    </div>
+                    </td>
+                <% end %>
             </tr>
         </thead>
         <tbody>

@@ -7,8 +7,8 @@ class WorkoutEntriesController < ApplicationController
     monthly_workouts = MonthlyWorkout.where(target_date: Date.new(@year.to_i, @month.to_i, 1))
     # 検索したtarget_dateを元にworkout名を表示する
 
-    workout_name_list = monthly_workouts.map do |monthly_workout|
-      monthly_workout.workout.name
+    @workouts = monthly_workouts.map do |monthly_workout|
+      monthly_workout.workout
     end
     # monthly_workouts テーブルのworkout_idからchildren_workouts テーブルのworkout_idを検索する
     # NOTE: monthly_workouts は配列。MonthlyWorkout レコードがゼロ個以上含まれている
@@ -22,6 +22,18 @@ class WorkoutEntriesController < ApplicationController
   # TODO: 今月のワークアウト名に対して、どの児童が対応しているか、データの対応付けをする
 
   # TODO: JavaScript でワークアウト名の自動保存する
+
+  def update
+    # パラメータを参照する
+    workout = Workout.find(params[:id])
+
+    # パラメータの値を使って Workout レコードを検索して取り出す
+    # 取り出したレコードのワークアウト名を更新する
+    workout.update(name: params[:workout_name])
+
+    # TODO: 適当なリダイレクト先を設定する
+    redirect_to '/admin/workouts/monthly/2021/2'
+  end
 
   private
 
