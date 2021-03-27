@@ -49,10 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     Array.from(toggleElements).forEach((element) => {
         element.addEventListener('click', showInput)
+
         Array.from(element.querySelectorAll('input'), (elm) => {
             elm.addEventListener('blur', hideInput)
         })
-        
+
     })
 
     Array.from(document.querySelectorAll('input.toggleInput')).forEach((element) => {
