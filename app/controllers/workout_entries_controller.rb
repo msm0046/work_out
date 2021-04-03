@@ -14,12 +14,23 @@ class WorkoutEntriesController < ApplicationController
     injection_hash = Hash.new { |hash, key| hash[key] = [] }
 
     @workout_grouped_children =
-      monthly_workouts.inject(injection_hash) do |hash, monthly_workout|
-        hash[monthly_workout.workout] << monthly_workout.child.name
-        hash
+      monthly_workouts.each_with_object(injection_hash) do |monthly_workout, hash|
+        hash[monthly_workout.workout] << monthly_workout.child&.name
       end
   end
 
+  # キー値は String, Symbol 以外に クラスのインスタンスも設定できる
+  # hash["string_key"]
+  # hash[:symbol_key]
+  # hash[monthly_workout] << :foo
+
+  # MonthlyWorkout に児童の ID を割り当てる
+  # monthly_workout = MonthlyWorkout.first
+  # child = Child.first
+  # monthly_workout.child_id = child.id
+  # monthly_workout.save
+
+  walking
   def update
     # パラメータを参照する
     workout = Workout.find(params[:id])
