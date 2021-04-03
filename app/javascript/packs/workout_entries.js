@@ -1,9 +1,10 @@
 // TODO: 入力して、フォーカスが外れたら、フォームに値を書き込む
 
-// function updateFormValue(idValue, workoutNameValue) {
 function updateFormValue() {
     let updatingValue = this.parentNode.querySelector('input').value
     let updatingId = this.parentNode.querySelector('input').dataset.id
+
+    if (updatingValue === '') { return }
 
     let valueTarget = document.querySelector('#workout_name')
     let idTarget = document.querySelector('#id')
@@ -38,6 +39,8 @@ function hideInput() {
 }
 
 function updateSpanValue(context, value) {
+    if (value === '') { return }
+
     context.parentNode.querySelector('span').textContent = value
 }
 
@@ -46,10 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     Array.from(toggleElements).forEach((element) => {
         element.addEventListener('click', showInput)
+
         Array.from(element.querySelectorAll('input'), (elm) => {
             elm.addEventListener('blur', hideInput)
         })
-        
+
     })
 
     Array.from(document.querySelectorAll('input.toggleInput')).forEach((element) => {

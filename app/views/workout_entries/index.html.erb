@@ -3,8 +3,6 @@
 
 <h1><%= @year %>年<%= @month %>月</h1>
 
-<!-- TODO: workout の入力欄を 3つ 用意する -->
-
 <%= form_with url: '/admin/workouts/monthly', id: 'form' do |f| %>
     <%= f.text_field 'id' %>
     <%= f.text_field 'workout_name' %>
@@ -12,62 +10,31 @@
 <% end %>
 
 <div class="wrapper">
+  <% @workout_grouped_children.each do |workout, children| %>
     <table>
-        <thead>
+      <thead>
+        <tr>
+          <td class="td">
+            <div class="toggle">
+              <input type="text" class="toggleInput" data-id="<%= workout.id %>">
+              <span class="toggleValue"><%= workout.name %></span>
+            </div>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% children.each do |child_name| %>
             <tr>
-                <% @workouts.each do |workout| %>
-                    <td class="td">
-                    <!-- input を表示したとき、workout を非表示にしたい -->
-                    <div class="toggle">
-                        <input type="text" class="toggleInput" data-id="<%= workout.id %>">
-                        <span class="toggleValue"><%= workout.name %></span>
-                    </div>
-                    </td>
-                <% end %>
+              <td><%= child_name %></td>
             </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>名前A</td>
-            </tr>
-            <tr>
-                <td>名前B</td>
-            </tr>
-        </tbody>
+          <% end %>
+        </tr>
+      </tbody>
     </table>
-
-    <table>
-        <thead>
-            <tr>
-                <td class="td">なわとび</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>名前A</td>
-            </tr>
-            <tr>
-                <td>名前B</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <table>
-        <thead>
-            <tr>
-                <td class="td">じゃんけん</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>名前A</td>
-            </tr>
-            <tr>
-                <td>名前B</td>
-            </tr>
-        </tbody>
-    </table>
+  <% end %>
 </div>
+
 <h1><%= @next_year %>年<%= @next_month %>月</h1>
 
 <!-- TODO: workout の入力欄を 3つ 用意する -->
