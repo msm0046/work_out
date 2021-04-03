@@ -19,6 +19,11 @@ class WorkoutEntriesController < ApplicationController
       end
   end
 
+  # {
+  #   workout_1: %w[A B],
+  #   workout_2: ['C'],
+  #   workout_3: []
+  # }
   # キー値は String, Symbol 以外に クラスのインスタンスも設定できる
   # hash["string_key"]
   # hash[:symbol_key]
@@ -30,7 +35,6 @@ class WorkoutEntriesController < ApplicationController
   # monthly_workout.child_id = child.id
   # monthly_workout.save
 
-  walking
   def update
     # パラメータを参照する
     workout = Workout.find(params[:id])

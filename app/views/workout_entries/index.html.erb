@@ -9,6 +9,14 @@
     <%= f.submit 'submit' %>
 <% end %>
 
+<%# { %>
+  <%# workout_1: ["児童名A", "児童名B"], %>
+  <%# workout_2: ["児童名C"], %>
+  <%# workout_3: [] %>
+<%# } %>
+
+<%# key, value = [workout_1, ["児童名A", "児童名B"]] %>
+
 <div class="wrapper">
   <% @workout_grouped_children.each do |workout, children| %>
     <table>
