@@ -17,6 +17,25 @@ class WorkoutEntriesController < ApplicationController
       monthly_workouts.each_with_object(injection_hash) do |monthly_workout, hash|
         hash[monthly_workout.workout] << monthly_workout.child&.name
       end
+
+    # TODO: 来月の表示について、日本語で書き起こしてみる
+    # * 次の月を表示させる
+    @next_month = Date.new(@year.to_i, @month.to_i, 1).next_month
+
+    # TODO: 来月分のワークアウト表示について、「ワークアウト名」「入力フォーム」を表示させる
+    # TODO: データベースからワークアウトを呼び出す (来月分)
+
+    # HINT: 「今月」"より大きい" MonthlyWorkout レコードを検索する
+    # MEMO: 「?」はプレースホルダ
+    MonthlyWorkout.where('target_date < ?', target_date.end_of_month)
+    # SELECT * FROM MonthlyWorkout
+    # WHERE MonthlyWorkout.target_date < 2021-05-01
+
+    @next_month_workouts = [
+      Workout.new(name: 'なわとび'),
+      Workout.new(name: 'おにごっこ'),
+      nil
+    ]
   end
 
   # {
@@ -45,5 +64,24 @@ class WorkoutEntriesController < ApplicationController
 
     # TODO: 適当なリダイレクト先を設定する
     redirect_to '/admin/workouts/monthly/2021/2'
+  end
+
+  def next_month
+    workout_name = params[:workout_name]
+    # TODO: 受け取ったパラメータをもとに、翌月のワークアウトとして保存する
+    # HINT: find_or_create メソッドで検索・作成をすると、重複レコードが作成されない、better な処理が記述できる
+    workout = Workout.new(name: workout_name)
+    workout.save
+
+    # TODO: monthly_workouts テーブルに workout を保存する
+    # FIXME: 児童の ID 設定が必要だが、取得・設定する方法がない
+    next_month = Date.new(Date.current.year, Date.current.month, 1).next_month
+    MonthlyWorkout.create!(
+      workout_id: workout.id,
+      target_date: next_month,
+      child_id: Child.first.id # エラー回避の一時的な措置
+    )
+
+    # monthly_workout = MonthlyWorkout.new(target_date: next_month)
   end
 end

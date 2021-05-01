@@ -43,6 +43,20 @@
   <% end %>
 </div>
 
-<h1><%= @next_year %>年<%= @next_month %>月</h1>
+<h1><%= @next_month.year %>年<%= @next_month.month %>月</h1>
 
+<% @next_month_workouts.each do |next_month_workout| %>
+  <% if next_month_workout.nil? %>
+    <%= form_with url: '/admin/workouts/next_month', id: 'form' do |f| %>
+      <%= f.text_field 'workout_name', placeholder: 'ワークアウト名を入力してください' %>
+      <%= f.submit 'submit' %>
+    <% end %>
+  <% else %>
+    <%= next_month_workout.name %>
+  <% end %>
+<% end %>
+
+<!-- <input name="worout_name" value="bar"> -->
+<!-- <input name="foo" value="bar"> -->
+<% #params[:foo] # => 'bar' %>
 <!-- TODO: workout の入力欄を 3つ 用意する -->
