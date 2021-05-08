@@ -4,11 +4,10 @@
 <h1><%= @year %>年<%= @month %>月</h1>
 
 <%= form_with url: '/admin/workouts/monthly', id: 'form' do |f| %>
-    <%= f.text_field 'id' %>
-    <%= f.text_field 'workout_name' %>
-    <%= f.submit 'submit' %>
+    <%= f.hidden_field 'id' %>
+    <%= f.hidden_field 'workout_name' %>
+    <%= f.submit 'submit', class: 'hidden' %>
 <% end %>
-
 <%# { %>
   <%# workout_1: ["児童名A", "児童名B"], %>
   <%# workout_2: ["児童名C"], %>
