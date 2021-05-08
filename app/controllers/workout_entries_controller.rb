@@ -22,20 +22,30 @@ class WorkoutEntriesController < ApplicationController
     # * 次の月を表示させる
     @next_month = Date.new(@year.to_i, @month.to_i, 1).next_month
 
-    # TODO: 来月分のワークアウト表示について、「ワークアウト名」「入力フォーム」を表示させる
-    # TODO: データベースからワークアウトを呼び出す (来月分)
-
     # HINT: 「今月」"より大きい" MonthlyWorkout レコードを検索する
     # MEMO: 「?」はプレースホルダ
-    MonthlyWorkout.where('target_date < ?', target_date.end_of_month)
+    @next_month_workouts = MonthlyWorkout.where('target_date > ?', target_date.end_of_month)
     # SELECT * FROM MonthlyWorkout
-    # WHERE MonthlyWorkout.target_date < 2021-05-01
+    # WHERE MonthlyWorkout.target_date > 2021-05-31
 
-    @next_month_workouts = [
-      Workout.new(name: 'なわとび'),
-      Workout.new(name: 'おにごっこ'),
-      nil
-    ]
+    # TODO: 来月分のワークアウト表示について、「ワークアウト名」「入力フォーム」を表示させる
+    # TODO: データベースからワークアウトを呼び出す (来月分)
+    # @next_month_workouts = [
+    #   Workout.new(name: 'なわとび'),
+    #   Workout.new(name: 'おにごっこ'),
+    #   nil
+    # ]
+
+    # TODO: @next_month_workouts の要素数が 3つ じゃなかったら、3つになるまで nil を挿入する
+    # 3 未満 : (1..2)
+    # 3 以下 : (1..3)
+    loop do
+      if @next_month_workouts.size < 3
+        @next_month_workouts.push(nil)
+      else
+        break
+      end
+    end
   end
 
   # {
@@ -68,12 +78,11 @@ class WorkoutEntriesController < ApplicationController
 
   def next_month
     workout_name = params[:workout_name]
-    # TODO: 受け取ったパラメータをもとに、翌月のワークアウトとして保存する
+
     # HINT: find_or_create メソッドで検索・作成をすると、重複レコードが作成されない、better な処理が記述できる
     workout = Workout.new(name: workout_name)
     workout.save
 
-    # TODO: monthly_workouts テーブルに workout を保存する
     # FIXME: 児童の ID 設定が必要だが、取得・設定する方法がない
     next_month = Date.new(Date.current.year, Date.current.month, 1).next_month
     MonthlyWorkout.create!(
