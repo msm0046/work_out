@@ -40,6 +40,11 @@ class WorkoutEntriesController < ApplicationController
     # 3 未満 : (1..2)
     # 3 以下 : (1..3)
     loop do
+      # 空のときは .to_a が使えるかも...?
+      # 「空のとき」の条件追加が必要
+      if @next_month_workouts.to_a.size.zero?
+        @next_month_workouts = [nil, nil, nil]
+      end
       if @next_month_workouts.size < 3
         @next_month_workouts.push(nil)
       else
