@@ -39,12 +39,9 @@ class WorkoutEntriesController < ApplicationController
     # TODO: @next_month_workouts の要素数が 3つ じゃなかったら、3つになるまで nil を挿入する
     # 3 未満 : (1..2)
     # 3 以下 : (1..3)
+    @next_month_workouts = @next_month_workouts.to_a
     loop do
-      # 空のときは .to_a が使えるかも...?
-      # 「空のとき」の条件追加が必要
-      if @next_month_workouts.to_a.size.zero?
-        @next_month_workouts = [nil, nil, nil]
-      end
+      @next_month_workouts = [nil, nil, nil] if @next_month_workouts.size.zero?
       if @next_month_workouts.size < 3
         @next_month_workouts.push(nil)
       else
