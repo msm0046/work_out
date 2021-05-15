@@ -97,6 +97,6 @@ class WorkoutEntriesController < ApplicationController
 
     # TODO: 「next_month の年月 - ひと月」の URL にリダイレクトしてあげる
     current_month = next_month.prev_month
-    redirect_to "/admin/workout/monthly/#{current_month.year}/#{currenext_month.month}"
+    redirect_to "/admin/workout/monthly/#{current_month.year}/#{current_month.month}"
   end
 end
