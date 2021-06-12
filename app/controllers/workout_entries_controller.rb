@@ -75,7 +75,7 @@ class WorkoutEntriesController < ApplicationController
     workout.update(name: params[:workout_name])
 
     # TODO: 適当なリダイレクト先を設定する
-    redirect_to '/admin/workouts/monthly/2021/2'
+    # redirect_to '/admin/workouts/monthly/2021/2'
   end
 
   def next_month
