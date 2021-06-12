@@ -1,0 +1,60 @@
+// Place all the styles related to the children_workouts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.list-syllabary-ja {
+  $item-font-size: 16px;
+  $item-margin: 10px;
+  $item-border-width: 1px;
+  $item-padding: 5px;
+
+  display: flex; // See Also: http://www.w3.org/TR/css3-flexbox/
+  flex-flow: row wrap;
+  writing-mode: tb-rl; // IE
+  -webkit-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
+  margin: 0 0 calc(1em - #{$item-margin});
+  padding: 0;
+  width: ($item-font-size + $item-border-width * 2 + $item-padding * 2) * 10 +
+    $item-margin * 9;
+  height: ($item-font-size + $item-border-width * 2 + $item-padding * 2) * 5 +
+    $item-margin * 5;
+  list-style: none;
+  line-height: 1;
+  font-size: $item-font-size;
+  li {
+    margin: 0 0 $item-margin $item-margin;
+    padding: 0;
+    width: 28px;
+    &.next-kana-empty {
+      margin-bottom: $item-font-size + $item-border-width * 2 + $item-padding *
+        2 + $item-margin * 2;
+    }
+    &:last-child {
+      margin-left: 0;
+    }
+  }
+  a {
+    display: block;
+    padding: $item-padding;
+    border: $item-border-width solid #b5b5b5;
+    border-radius: 3px;
+    background: linear-gradient(to bottom, #fff 60%, #efefef 100%);
+    color: #333;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      border-color: #c72020;
+      background: linear-gradient(
+        to bottom,
+        lighten(#c72020, 10) 60%,
+        #c72020 100%
+      );
+      color: #fff;
+    }
+  }
+}
+
+body {
+  font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", sans-serif;
+}

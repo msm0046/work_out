@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'children_workouts/index'
   # TODO: workout_entries/index は不要なので削除する
   get 'workout_entries/index'
   get 'admin/workouts/monthly/:year/:month', to: 'workout_entries#index'
